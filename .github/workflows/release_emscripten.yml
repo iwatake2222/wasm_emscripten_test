@@ -1,0 +1,32 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: build
+      run: |
+        docker run \
+          --rm \
+          -v $(pwd):/src \
+          -u $(id -u):$(id -g) \
+          emscripten/emsdk:3.1.1 \
+          sh ./build_emscripten.sh
+
+    - name: collect
+      run: |
+        mkdir public && cd public
+        cp ../build_em/*.html .
+        cp ../build_em/*.js .
+        cp ../build_em/*.wasm .
+
+    - name: deploy
+      uses: JamesIves/github-pages-deploy-action@v4.2.2
+      with:
+        branch: gh-pages
+        folder: public
+

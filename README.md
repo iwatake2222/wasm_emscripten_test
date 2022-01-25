@@ -1,8 +1,13 @@
 
 # About
-Convert C++ project to HTML+JS using WASM (Emscripten)
+- Sample project to:
+- Convert C++ project to HTML+JS using WebAssembly(WASM) + Emscripten
+- Deploy the compiled pages using GitHub Actions
+    - https://iwatake2222.github.io/wasm_emscripten_test/main.html
 
-# ビルド方法
+# How to Build
+It's just for build and test in local environment
+
 ```sh
 sudo service docker start
 docker pull emscripten/emsdk:3.1.1
@@ -16,6 +21,8 @@ emcmake cmake ..
 make
 ```
 
+or
+
 ```sh
 sudo service docker start
 docker pull emscripten/emsdk:3.1.1
@@ -28,4 +35,6 @@ docker run \
   sh ./build_emscripten.sh
 ```
 
-
+# How to deploy
+- See https://github.com/iwatake2222/wasm_emscripten_test/blob/master/.github/workflows/release_emscripten.yml
+- Configure GitHub Pages in Settings -> Pages. Select gh-pages branch as Source
