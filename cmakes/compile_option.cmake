@@ -15,3 +15,7 @@ else()
         set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type (default Release)" FORCE)
     endif()
 endif()
+
+if (EMSCRIPTEN)
+    set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
